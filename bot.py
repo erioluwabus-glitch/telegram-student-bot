@@ -18,9 +18,9 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Environment variables
-TOKEN = os.environ['BOT_TOKEN']
-ADMIN_ID = int(os.environ['ADMIN_ID'])
-GROUP_ID = -1003069423158
+TOKEN = os.environ['8138720265:AAHtklkJUBfb8Z9haLJylvcNad56lWT-WiE']
+7109534825 = int(os.environ['7109534825'])
+GROUP_ID = -1003036481382
 
 # Google Sheets setup
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
@@ -48,7 +48,7 @@ def get_keyboard(is_admin=False):
 
 # /start and /menu
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    is_admin = update.effective_user.id == ADMIN_ID
+    is_admin = update.effective_user.id == 7109534825
     markup = get_keyboard(is_admin)
     await update.message.reply_text("Welcome! Choose an option:", reply_markup=markup)
 
@@ -88,22 +88,22 @@ async def get_assignment_content(update: Update, context: ContextTypes.DEFAULT_T
             caption = f"Module {module} submission by @{username}"
             if update.message.caption:
                 caption += f"\n{update.message.caption}"
-            sent_msg = await context.bot.send_photo(chat_id=GROUP_ID, photo=photo_id, caption=caption)
+            sent_msg = await context.bot.send_photo(chat_id=-1003036481382, photo=photo_id, caption=caption)
         elif update.message.video:
             video_id = update.message.video.file_id
             caption = f"Module {module} submission by @{username}"
             if update.message.caption:
                 caption += f"\n{update.message.caption}"
-            sent_msg = await context.bot.send_video(chat_id=GROUP_ID, video=video_id, caption=caption)
+            sent_msg = await context.bot.send_video(chat_id=-1003036481382, video=video_id, caption=caption)
         elif update.message.text:
             text = update.message.text
-            sent_msg = await context.bot.send_message(chat_id=GROUP_ID, text=f"Module {module} submission by @{username}:\n{text}")
+            sent_msg = await context.bot.send_message(chat_id=-1003036481382, text=f"Module {module} submission by @{username}:\n{text}")
         else:
             await update.message.reply_text("Unsupported content type. Please send text, photo, or video.")
             return CONTENT
 
         msg_id = sent_msg.message_id
-        content = f"telegram:{GROUP_ID}:{msg_id}"
+        content = f"telegram:{-1003036481382}:{msg_id}"
         date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         assign_ws.append_row([str(userid), username, module, date, content, "pending", ""])
         enc = random.choice(encouragements)
@@ -140,22 +140,22 @@ async def get_win_content(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             caption = f"{win_type} win by @{username}"
             if update.message.caption:
                 caption += f"\n{update.message.caption}"
-            sent_msg = await context.bot.send_photo(chat_id=GROUP_ID, photo=photo_id, caption=caption)
+            sent_msg = await context.bot.send_photo(chat_id=-1003036481382, photo=photo_id, caption=caption)
         elif update.message.video:
             video_id = update.message.video.file_id
             caption = f"{win_type} win by @{username}"
             if update.message.caption:
                 caption += f"\n{update.message.caption}"
-            sent_msg = await context.bot.send_video(chat_id=GROUP_ID, video=video_id, caption=caption)
+            sent_msg = await context.bot.send_video(chat_id=-1003036481382, video=video_id, caption=caption)
         elif update.message.text:
             text = update.message.text
-            sent_msg = await context.bot.send_message(chat_id=GROUP_ID, text=f"{win_type} win by @{username}:\n{text}")
+            sent_msg = await context.bot.send_message(chat_id=-1003036481382, text=f"{win_type} win by @{username}:\n{text}")
         else:
             await update.message.reply_text("Unsupported content type. Please send text, photo, or video.")
             return WIN_CONTENT
 
         msg_id = sent_msg.message_id
-        content = f"telegram:{GROUP_ID}:{msg_id}"
+        content = f"telegram:{-1003036481382}:{msg_id}"
         date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         wins_ws.append_row([str(userid), username, win_type.lower(), date, content])
         enc = random.choice(encouragements)
@@ -193,7 +193,7 @@ async def check_status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 G_USERNAME, G_MODULE, G_STATUS, G_NOTES = range(4)
 
 async def start_grade(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    if update.effective_user.id != ADMIN_ID:
+    if update.effective_user.id != 7109534825:
         await update.message.reply_text("This feature is admin-only.")
         return ConversationHandler.END
     await update.message.reply_text("Enter username (without @):")
@@ -253,7 +253,7 @@ async def get_g_notes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
 
 # /getmedia
 async def get_media(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    if update.effective_user.id != ADMIN_ID:
+    if update.effective_user.id != 7109534825:
         return
     args = context.args
     if len(args) != 2:
@@ -277,7 +277,7 @@ async def get_media(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 # Daily Reminder
 async def send_daily_reminder(context: ContextTypes.DEFAULT_TYPE) -> None:
-    await context.bot.send_message(chat_id=GROUP_ID, text="Daily reminder: Submit or share a win! 🚀")
+    await context.bot.send_message(chat_id=-1003036481382, text="Daily reminder: Submit or share a win! 🚀")
 
 def run_schedule():
     def job():
