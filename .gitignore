@@ -1,0 +1,7 @@
+# Secrets and credentials
+credentials.json
+*.env
+# Logs and temp files
+*.log
+# OS files
+.DS_Store
