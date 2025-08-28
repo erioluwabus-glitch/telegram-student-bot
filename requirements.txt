@@ -1,5 +1,0 @@
-python-telegram-bot==21.0
-gspread
-oauth2client
-schedule
-flask
